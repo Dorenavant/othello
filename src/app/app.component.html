@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Othello</title>
+  <script src="/lib/angular.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Othello</h1>
+  </div>
+  <div class="container">
+    <div *ngFor="let tileRow of tiles">
+      <button ngClass="gameTile"
+              *ngFor="let tile of tileRow;
+              let index=index;
+              let isOdd=odd;
+              let isEven=even"
+              (click)="clicked(tile.x, tile.y)"
+              [class.gameTileBlack]="tile.val === TileColor.BLACK"
+              [class.gameTileWhite]="tile.val === TileColor.WHITE"></button>
+    </div>
+  </div>
+</body>
+
+</html>
