@@ -3,13 +3,14 @@ h1 {
 }
 
 .gameTile {
-    background-color: rgb(91, 75, 50);
+    background-image: url("../assets/empty_tile.png");
+    background-size: cover;
     color: white;
     width: 5em;
     height: 5em;
 }
 .gameTile:hover {
-    background-color: #4141EE;
+    background-color: #6A5D05;
 }
 .gameTileBlack {
     background-image: url("../assets/black_tile.png");

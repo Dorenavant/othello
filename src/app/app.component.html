@@ -13,6 +13,7 @@
   <div class="container">
     <div *ngFor="let tileRow of tiles">
       <button ngClass="gameTile"
+              [attr.disabled]="(tile.val === TileColor.EMPTY) ? null : true"
               *ngFor="let tile of tileRow;
               let index=index;
               let isOdd=odd;
