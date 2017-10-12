@@ -1,5 +1,27 @@
 h1 {
-    padding: .2em;
+    padding: 3px;
+    text-align: center;
+    font-family: Impact;
+    font-style: normal;
+    font-size: 2.2em;
+}
+
+#main_container {
+    position: relative;
+    display: flex;
+}
+
+#board_container {
+    display: inline;
+    border: 0.2em solid;
+    border-color: #787474;
+    margin-right: 0.3em;
+}
+
+#UI_container {
+    display: inline;
+    border: 0.2em solid;
+    border-color: #787474;
 }
 
 .gameTile {
@@ -9,9 +31,58 @@ h1 {
     width: 5em;
     height: 5em;
 }
-.gameTile:hover {
-    background-color: #6A5D05;
+
+.gameTileBlackValid {
+    background-image: url("../assets/empty_tile.png");
+    background-size: cover;
 }
+
+.gameTileBlackValid:hover {
+    background-image: url("../assets/black_tile.png");
+    background-size: cover;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.gameTileBlackAllValid {
+    background-image: url("../assets/empty_tile.png");
+    background-size: cover;
+    opacity: 0.2;
+}
+
+.gameTileBlackAllValid:hover {
+    background-image: url("../assets/black_tile.png");
+    background-size: cover;
+    opacity: 0.6;
+    cursor: pointer;
+
+}
+
+.gameTileWhiteValid {
+    background-image: url("../assets/empty_tile.png");
+    background-size: cover;
+}
+
+.gameTileWhiteValid:hover {
+    background-image: url("../assets/white_tile.png");
+    background-size: cover;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.gameTileWhiteAllValid {
+    background-image: url("../assets/empty_tile.png");
+    background-size: cover;
+    opacity: 0.2;
+}
+
+.gameTileWhiteAllValid:hover {
+    background-image: url("../assets/white_tile.png");
+    background-size: cover;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
 .gameTileBlack {
     background-image: url("../assets/black_tile.png");
     background-size: cover;

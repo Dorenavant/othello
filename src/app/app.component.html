@@ -7,20 +7,31 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Othello</h1>
-  </div>
-  <div class="container">
-    <div *ngFor="let tileRow of tiles">
-      <button ngClass="gameTile"
-              [attr.disabled]="(tile.val === TileColor.EMPTY) ? null : true"
-              *ngFor="let tile of tileRow;
-              let index=index;
-              let isOdd=odd;
-              let isEven=even"
-              (click)="clicked(tile.x, tile.y)"
-              [class.gameTileBlack]="tile.val === TileColor.BLACK"
-              [class.gameTileWhite]="tile.val === TileColor.WHITE"></button>
+  <div id="main_container" class="container">
+    <div id="board_container" class="container">
+      <div *ngFor="let tileRow of tiles">
+        <button [ngClass]="{'gameTile': true,
+                            'gameTileBlackValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && tile.val === TileColor.EMPTY,
+                            'gameTileWhiteValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && tile.val === TileColor.EMPTY,
+                            'gameTileBlack': tile.val === TileColor.BLACK,
+                            'gameTileWhite': tile.val === TileColor.WHITE}"
+                *ngFor="let tile of tileRow;
+                let index=index;
+                let isOdd=odd;
+                let isEven=even"
+                [attr.disabled]="((tile.val === TileColor.EMPTY) && isValidMove(tile.x, tile.y)) ? null : true"
+                (click)="clicked(tile.x, tile.y)"></button>
+      </div>
+    </div>
+    <div id="UI_container" class="container">
+      <h1>OTHELLO</h1>
+      <button id="turnDisplay"
+            ngClass="gameTile"
+            [attr.disabled]="true"
+            [class.gameTileBlack]="currentTurn === TileColor.BLACK"
+            [class.gameTileWhite]="currentTurn === TileColor.WHITE"></button><br>
+      <input id="showValidMoves" type="checkbox" ngModel="showMoves">Show Valid Moves
+      <button (click)="test()">test</button>
     </div>
   </div>
 </body>

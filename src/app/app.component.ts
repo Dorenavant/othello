@@ -37,8 +37,12 @@ export class Board {
         this._tiles[i][j] = { x: i, y: j, val: TileEnum.EMPTY };
       }
     }
-
+    this._tiles[BOARD_SIZE/2][BOARD_SIZE/2].val = TileEnum.BLACK;
+    this._tiles[(BOARD_SIZE/2)-1][BOARD_SIZE/2].val = TileEnum.WHITE;
+    this._tiles[BOARD_SIZE/2][(BOARD_SIZE/2)-1].val = TileEnum.WHITE;
+    this._tiles[(BOARD_SIZE/2)-1][(BOARD_SIZE/2)-1].val = TileEnum.BLACK;
   }
+
   public get tiles(): Tile[][] {
     return this._tiles;
   }
@@ -62,12 +66,28 @@ function spread(x: number, y: number, vec: Posn, dir: number): boolean {
   return false;
 }
 
-function dirSpread(x: number, y: number) {
+function spreadCheck(x: number, y: number, vec: Posn, dir: number, change: boolean): boolean {
+  if (x < 0 || y < 0 || x >= BOARD_SIZE || y >= BOARD_SIZE) return false;
+  if (board.tiles[x][y].val === TileEnum.EMPTY) return false;
+  if (board.tiles[x][y].val === turn) return change;
+  if (spreadCheck(x+(vec.x*dir), y+(vec.y*dir), vec, dir, true)) return true;
+  return false;
+}
+
+function dirSpread(x: number, y: number): void {
   for (let dir of directions) {
     spread(x+dir.x, y+dir.y, dir, 1);
     spread(x-dir.x, y-dir.y, dir, -1);
   }
 }
+
+// function movesExist(): boolean {
+//   for (let tileRow of board.tiles) {
+//     for (let tile of tileRow) {
+
+//     }
+  
+// }
 
 @Component({
   selector: 'app-root',
@@ -76,19 +96,27 @@ function dirSpread(x: number, y: number) {
 })
 
 export class AppComponent {
+  showMoves = false;
   title = 'Othello';
   tiles = board.tiles;
   TileColor = TileEnum;
+  currentTurn = turn;
+
   clicked(x: number, y: number): void {
     board.tiles[x][y].val = turn;
     dirSpread(x, y);
     turn = (turn === TileEnum.BLACK) ? TileEnum.WHITE : TileEnum.BLACK;
+    this.currentTurn = turn;
   }
 
-  checkSpread(x: number, y: number): boolean {
+  test(): void {
+    console.log(this.showMoves);
+  }
+
+  isValidMove(x: number, y: number): boolean {
     for (let dir of directions) {
-      if (spread(x+dir.x, y+dir.y, dir, 1)) return true;
-      if (spread(x-dir.x, y-dir.y, dir, -1)) return true;
+      if (spreadCheck(x+dir.x, y+dir.y, dir, 1, false)) return true;
+      if (spreadCheck(x-dir.x, y-dir.y, dir, -1, false)) return true;
     }
     return false;
   }
