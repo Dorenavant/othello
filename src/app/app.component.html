@@ -11,15 +11,23 @@
     <div id="board_container" class="container">
       <div *ngFor="let tileRow of tiles">
         <button [ngClass]="{'gameTile': true,
-                            'gameTileBlackValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && tile.val === TileColor.EMPTY,
-                            'gameTileWhiteValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && tile.val === TileColor.EMPTY,
+                            'gameTileBlackValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && !showMoves,
+                            'gameTileWhiteValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && !showMoves,
+                            'gameTileBlackValidHover': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && isHovered(tile.x, tile.y) && !showMoves,
+                            'gameTileWhiteValidHover': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && isHovered(tile.x, tile.y) && !showMoves,
+                            'gameTileBlackAllValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && showMoves,
+                            'gameTileWhiteAllValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && showMoves,
+                            'gameTileBlackAllValidHover': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && isHovered(tile.x, tile.y) && showMoves,
+                            'gameTileWhiteAllValidHover': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && isHovered(tile.x, tile.y) && showMoves,
                             'gameTileBlack': tile.val === TileColor.BLACK,
                             'gameTileWhite': tile.val === TileColor.WHITE}"
+                (mouseenter)="setHover(tile.x, tile.y, true)"
+                (mouseleave)="setHover(tile.x, tile.y, false)"
                 *ngFor="let tile of tileRow;
                 let index=index;
                 let isOdd=odd;
                 let isEven=even"
-                [attr.disabled]="((tile.val === TileColor.EMPTY) && isValidMove(tile.x, tile.y)) ? null : true"
+                [attr.disabled]="(isValidMove(tile.x, tile.y)) ? null : true"
                 (click)="clicked(tile.x, tile.y)"></button>
       </div>
     </div>
@@ -29,9 +37,11 @@
             ngClass="gameTile"
             [attr.disabled]="true"
             [class.gameTileBlack]="currentTurn === TileColor.BLACK"
-            [class.gameTileWhite]="currentTurn === TileColor.WHITE"></button><br>
-      <input id="showValidMoves" type="checkbox" ngModel="showMoves">Show Valid Moves
-      <button (click)="test()">test</button>
+            [class.gameTileWhite]="currentTurn === TileColor.WHITE"></button><br><br>
+      <mat-checkbox id="show_valid_moves"
+                    [checked]="showMoves"
+                    (change)="showMoves = !showMoves">Show Valid Moves</mat-checkbox><br><br>
+      <button mat-raised-button id="start_game" (click)="test()">Start Game</button>
     </div>
   </div>
 </body>

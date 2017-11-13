@@ -1,3 +1,5 @@
+/*@import "../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";*/
+
 h1 {
     padding: 3px;
     text-align: center;
@@ -24,6 +26,17 @@ h1 {
     border-color: #787474;
 }
 
+#show_moves {
+    display: inline;
+    padding: 2px;
+}
+
+#start_game {
+    display: block;
+    margin: auto;
+    width: 60%;
+}
+
 .gameTile {
     background-image: url("../assets/empty_tile.png");
     background-size: cover;
@@ -37,7 +50,7 @@ h1 {
     background-size: cover;
 }
 
-.gameTileBlackValid:hover {
+.gameTileBlackValidHover {
     background-image: url("../assets/black_tile.png");
     background-size: cover;
     opacity: 0.5;
@@ -45,12 +58,12 @@ h1 {
 }
 
 .gameTileBlackAllValid {
-    background-image: url("../assets/empty_tile.png");
+    background-image: url("../assets/black_tile.png");
     background-size: cover;
-    opacity: 0.2;
+    opacity: 0.3;
 }
 
-.gameTileBlackAllValid:hover {
+.gameTileBlackAllValidHover {
     background-image: url("../assets/black_tile.png");
     background-size: cover;
     opacity: 0.6;
@@ -63,7 +76,7 @@ h1 {
     background-size: cover;
 }
 
-.gameTileWhiteValid:hover {
+.gameTileWhiteValidHover {
     background-image: url("../assets/white_tile.png");
     background-size: cover;
     opacity: 0.5;
@@ -71,12 +84,12 @@ h1 {
 }
 
 .gameTileWhiteAllValid {
-    background-image: url("../assets/empty_tile.png");
+    background-image: url("../assets/white_tile.png");
     background-size: cover;
-    opacity: 0.2;
+    opacity: 0.3;
 }
 
-.gameTileWhiteAllValid:hover {
+.gameTileWhiteAllValidHover {
     background-image: url("../assets/white_tile.png");
     background-size: cover;
     opacity: 0.6;
