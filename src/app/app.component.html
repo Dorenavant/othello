@@ -10,6 +10,8 @@
   <div id="main_container" class="container">
     <div id="board_container" class="container">
       <div *ngFor="let tileRow of tiles">
+        <!-- Main Board -->
+        <!-- Class values for button states, hover and click functionality -->
         <button [ngClass]="{'gameTile': true,
                             'gameTileBlackValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.BLACK && !showMoves,
                             'gameTileWhiteValid': isValidMove(tile.x, tile.y) && currentTurn === TileColor.WHITE && !showMoves,
@@ -24,24 +26,40 @@
                 (mouseenter)="setHover(tile.x, tile.y, true)"
                 (mouseleave)="setHover(tile.x, tile.y, false)"
                 *ngFor="let tile of tileRow;
-                let index=index;
-                let isOdd=odd;
-                let isEven=even"
+                let index=index"
                 [attr.disabled]="(isValidMove(tile.x, tile.y)) ? null : true"
                 (click)="clicked(tile.x, tile.y)"></button>
       </div>
     </div>
     <div id="UI_container" class="container">
       <h1>OTHELLO</h1>
+      <!-- Display current turn -->
       <button id="turnDisplay"
             ngClass="gameTile"
             [attr.disabled]="true"
             [class.gameTileBlack]="currentTurn === TileColor.BLACK"
             [class.gameTileWhite]="currentTurn === TileColor.WHITE"></button><br><br>
-      <mat-checkbox id="show_valid_moves"
+      <!-- Show all valid moves -->
+      <mat-slide-toggle id="show_valid_moves"
                     [checked]="showMoves"
-                    (change)="showMoves = !showMoves">Show Valid Moves</mat-checkbox><br><br>
-      <button mat-raised-button id="start_game" (click)="test()">Start Game</button>
+                    (change)="showMoves = !showMoves">Show Valid Moves</mat-slide-toggle><br><br>
+      <!-- Reset Board -->
+      <button mat-raised-button id="reset_board" (click)="reset_board()">New Game</button><br>
+      <!-- Number of Tiles Display -->
+      <table id="numTilesTable">
+        <tr>
+          <th>Player</th>
+          <th>Tiles</th>
+        </tr>
+        <tr>
+          <td>Black</td>
+          <td>{{numBlack}}</td>
+        </tr>
+        <tr>
+          <td>White</td>
+          <td>{{numWhite}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>
